@@ -34,7 +34,7 @@ public class DefaultStopwatchStateMachine implements StopwatchStateMachine {
 
     @Override
     public void setUIUpdateListener(final StopwatchUIUpdateListener uiUpdateListener) {
-        this.uiUpdateListener = uiUpdateListener;
+        this.uiUpdateListener = uiUpdateListener; //reference to the activity subclass
     }
 
     // forward event uiUpdateListener methods to the current state
@@ -67,4 +67,4 @@ public class DefaultStopwatchStateMachine implements StopwatchStateMachine {
     @Override public void actionLap()        { timeModel.setLaptime(); }
     @Override public void actionInc()        { timeModel.incRuntime(); actionUpdateView(); }
     @Override public void actionUpdateView() { state.updateView(); }
-}
+}d
