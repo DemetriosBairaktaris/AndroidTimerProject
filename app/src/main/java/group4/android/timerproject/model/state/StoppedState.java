@@ -20,4 +20,14 @@ public class StoppedState implements TimerState {
     public void onButton() {
 
     }
+
+    @Override
+    public void onTick() {
+
+    }
+
+    @Override
+    public String getState(){
+        return "Stopped";
+    }
 }

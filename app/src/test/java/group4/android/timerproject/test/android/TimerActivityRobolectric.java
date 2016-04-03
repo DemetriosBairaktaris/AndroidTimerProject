@@ -1,6 +1,6 @@
-package edu.luc.etl.cs313.android.simplestopwatch.test.android;
+package group4.android.timerproject.test.android;
 
-import edu.luc.etl.cs313.android.simplestopwatch.android.StopwatchAdapter;
+import group4.android.timerproject.android.TimerAdapter;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -17,19 +17,19 @@ import org.robolectric.annotation.Config;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk=18)
-public class StopwatchActivityRobolectric extends AbstractStopwatchActivityTest {
+public class TimerActivityRobolectric extends AbstractTimerActivityTest {
 
     private static String TAG = "stopwatch-android-activity-robolectric";
 
-    private StopwatchAdapter activity;
+    private TimerAdapter activity;
 
     @Before
     public void setUp() {
-        activity = Robolectric.buildActivity(StopwatchAdapter.class).create().start().visible().get();
+        activity = Robolectric.buildActivity(TimerAdapter.class).create().start().visible().get();
     }
 
     @Override
-    protected StopwatchAdapter getActivity() {
+    protected TimerAdapter getActivity() {
         return activity;
     }
 

@@ -20,4 +20,16 @@ public class RunningState implements TimerState {
     public void onButton() {
 
     }
+
+    @Override
+    public void onTick() {
+
+    }
+
+    @Override
+     public String getState(){
+        return "Running";
+    }
+
+
 }

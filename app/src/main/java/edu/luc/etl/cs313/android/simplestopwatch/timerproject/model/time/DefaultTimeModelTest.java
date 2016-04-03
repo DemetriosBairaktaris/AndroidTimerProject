@@ -1,4 +1,4 @@
-package edu.luc.etl.cs313.android.simplestopwatch.test.model.time;
+package edu.luc.etl.cs313.android.simplestopwatch.timerproject.model.time;
 
 import org.junit.After;
 import org.junit.Before;

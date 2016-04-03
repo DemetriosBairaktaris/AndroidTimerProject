@@ -7,4 +7,6 @@ package group4.android.timerproject.common;
 public interface TimerUIUpdateListener {
 
     void updateTime(int time);
+
+    void updateState(int stateId);
 }

@@ -11,4 +11,4 @@ public interface TimeModel {
     void decRuntime();
     int getRuntime();
 }
-}
+

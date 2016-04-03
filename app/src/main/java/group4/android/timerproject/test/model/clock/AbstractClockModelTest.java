@@ -1,4 +1,4 @@
-package edu.luc.etl.cs313.android.simplestopwatch.test.model.clock;
+package group4.android.timerproject.test.model.clock;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,8 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
 
-import edu.luc.etl.cs313.android.simplestopwatch.model.clock.ClockModel;
-import edu.luc.etl.cs313.android.simplestopwatch.model.clock.OnTickListener;
+import group4.android.timerproject.model.clock.ClockModel;
+
 
 
 /**
@@ -16,6 +16,11 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.clock.OnTickListener;
  * Uses a simple stub object to satisfy the clock's dependency.
  *
  * @author laufer
+ */
+
+
+/**
+ * Edited by cs313sp16p4group4 on 4/2/2016
  */
 public abstract class AbstractClockModelTest {
 
@@ -57,7 +62,7 @@ public abstract class AbstractClockModelTest {
      */
     @Test
     public void testRunning() throws InterruptedException {
-        final AtomicInteger i = new AtomicInteger(0);
+        final AtomicInteger i = new AtomicInteger(10);
         model.setOnTickListener(i::incrementAndGet);
         model.start();
         Thread.sleep(5500);

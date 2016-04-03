@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import edu.luc.etl.cs313.android.simplestopwatch.R;
+import group4.android.timerproject.R;
 import group4.android.timerproject.common.TimerUIUpdateListener;
 
 /**
@@ -54,13 +54,12 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
     @Override
     public void updateTime(int time) {
-        public void updateTime(final int time) {
             // UI adapter responsibility to schedule incoming events on UI thread
             runOnUiThread(() -> {
                 final TextView tvS = (TextView) findViewById(R.id.seconds);
                 final int seconds = time ;
                 tvS.setText(Integer.toString(seconds / 10) + Integer.toString(seconds % 10));
             });
-        }
+
     }
 }

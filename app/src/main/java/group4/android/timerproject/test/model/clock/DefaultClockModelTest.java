@@ -1,15 +1,19 @@
-package edu.luc.etl.cs313.android.simplestopwatch.test.model.clock;
+package group4.android.timerproject.test.model.clock;
 
 import org.junit.After;
 import org.junit.Before;
 
-import edu.luc.etl.cs313.android.simplestopwatch.model.clock.DefaultClockModel;
+import group4.android.timerproject.model.clock.DefaultClockModel;
 
 /**
  * Concrete testcase subclass for the default clock model implementation.
  *
  * @author laufer
  * @see http://xunitpatterns.com/Testcase%20Superclass.html
+ */
+
+/**
+ * Edited by cs313sp16p4group4 on 4/2/2016
  */
 public class DefaultClockModelTest extends AbstractClockModelTest {
 

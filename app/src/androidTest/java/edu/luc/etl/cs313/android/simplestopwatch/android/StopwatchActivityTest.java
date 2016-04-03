@@ -2,7 +2,7 @@ package edu.luc.etl.cs313.android.simplestopwatch.android;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import edu.luc.etl.cs313.android.simplestopwatch.test.android.AbstractStopwatchActivityTest;
+import edu.luc.etl.cs313.android.simplestopwatch.timerproject.android.AbstractStopwatchActivityTest;
 
 
 /**

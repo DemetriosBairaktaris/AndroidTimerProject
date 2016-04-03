@@ -10,5 +10,5 @@ import group4.android.timerproject.model.clock.OnTickListener;
 
 //StopwatchUIListener, OnTickListener, StopwatchUIUpdateSource, StopwatchSMStateVie
 public interface TimerStateMachine extends TimerUIListener, OnTickListener, TimerUIUpdateSource, TimerSMStateView {
-
+    public String getState();
 }

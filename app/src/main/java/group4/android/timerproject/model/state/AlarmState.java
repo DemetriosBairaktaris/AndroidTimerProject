@@ -21,4 +21,14 @@ public class AlarmState implements TimerState {
     public void onButton() {
 
     }
+
+    @Override
+    public void onTick() {
+
+    }
+
+    @Override
+    public String getState(){
+        return "Alarm";
+    }
 }
