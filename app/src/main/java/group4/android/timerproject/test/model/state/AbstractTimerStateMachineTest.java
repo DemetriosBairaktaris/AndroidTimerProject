@@ -24,6 +24,11 @@ import group4.android.timerproject.model.time.TimeModel;
  * @author laufer
  * @see http://xunitpatterns.com/Testcase%20Superclass.html
  */
+
+/**
+ * Converted from laufer's stopwatch code to cs313p4 timer code by group4 on 4/2/16
+ */
+
 public abstract class AbstractTimerStateMachineTest {
 
     private TimerStateMachine model;
@@ -197,6 +202,10 @@ public abstract class AbstractTimerStateMachineTest {
  * interfaces this mock object implements.
  *
  * @author laufer
+ */
+
+/**
+ * Converted from laufer's stopwatch code to cs313p4 timer code by group4 on 4/2/16
  */
 class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListener {
 

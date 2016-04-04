@@ -11,7 +11,7 @@ import android.widget.TextView;
 import group4.android.timerproject.R;
 import group4.android.timerproject.android.TimerAdapter;
 
-import static edu.luc.etl.cs313.android.simplestopwatch.common.Constants.SEC_PER_MIN;
+import static group4.android.timerproject.common.Constants.SEC_PER_MIN;
 
 /**
  * Abstract GUI-level test superclass of several essential stopwatch scenarios.
@@ -20,6 +20,10 @@ import static edu.luc.etl.cs313.android.simplestopwatch.common.Constants.SEC_PER
  *
  * TODO move this and the other tests to src/test once Android Studio supports
  * non-instrumentation unit tests properly.
+ */
+
+/**
+ * Converted from laufer's stopwatch code to cs313p4 timer code by group4 on 4/2/16
  */
 public abstract class AbstractTimerActivityTest {
 

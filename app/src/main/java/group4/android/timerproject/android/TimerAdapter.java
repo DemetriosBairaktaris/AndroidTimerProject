@@ -62,4 +62,9 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
             });
 
     }
+
+    @Override
+    public void updateState(int stateId) {
+
+    }
 }

@@ -12,7 +12,11 @@ import group4.android.timerproject.model.state.DefaultTimerStateMachine;
  * @author laufer
  * @see http://xunitpatterns.com/Testcase%20Superclass.html
  */
-public class DefaultStopwatchStateMachineTest extends AbstractTimerStateMachineTest {
+
+/**
+ * Converted from laufer's stopwatch code to cs313p4 timer code by group4 on 4/2/16
+ */
+public class DefaultTimerStateMachineTest extends AbstractTimerStateMachineTest {
 
     @Before
     public void setUp() throws Exception {

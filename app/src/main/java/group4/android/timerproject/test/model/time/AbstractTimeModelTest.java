@@ -1,14 +1,16 @@
-package edu.luc.etl.cs313.android.simplestopwatch.timerproject.model.time;
+package group4.android.timerproject.test.model.time;
 
-import static edu.luc.etl.cs313.android.simplestopwatch.common.Constants.SEC_PER_HOUR;
-import static edu.luc.etl.cs313.android.simplestopwatch.common.Constants.SEC_PER_MIN;
-import static edu.luc.etl.cs313.android.simplestopwatch.common.Constants.SEC_PER_TICK;
+import static group4.android.timerproject.common.Constants.SEC_PER_HOUR;
+import static group4.android.timerproject.common.Constants.SEC_PER_MIN;
+import static group4.android.timerproject.common.Constants.SEC_PER_TICK;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
+import group4.android.timerproject.model.time.TimeModel;
 
 /**
  * Testcase superclass for the time model abstraction.
@@ -16,6 +18,10 @@ import edu.luc.etl.cs313.android.simplestopwatch.model.time.TimeModel;
  *
  * @author laufer
  * @see http://xunitpatterns.com/Testcase%20Superclass.html
+ */
+
+/**
+ * Converted from laufer's stopwatch code to cs313p4 timer code by Eddy on 4/3/16
  */
 public abstract class AbstractTimeModelTest {
 
@@ -32,12 +38,12 @@ public abstract class AbstractTimeModelTest {
     }
 
     /**
-     * Verifies that runtime and laptime are initially 0 or less.
+     * Verifies that runtime is initially 0 or less.
      */
     @Test
     public void testPreconditions() {
         assertEquals(0, model.getRuntime());
-        assertTrue(model.getLaptime() <= 0);
+
     }
 
     /**
@@ -46,10 +52,8 @@ public abstract class AbstractTimeModelTest {
     @Test
     public void testIncrementRuntimeOne() {
         final int rt = model.getRuntime();
-        final int lt = model.getLaptime();
         model.incRuntime();
         assertEquals((rt + SEC_PER_TICK) % SEC_PER_MIN, model.getRuntime());
-        assertEquals(lt, model.getLaptime());
     }
 
     /**
@@ -58,32 +62,34 @@ public abstract class AbstractTimeModelTest {
     @Test
     public void testIncrementRuntimeMany() {
         final int rt = model.getRuntime();
-        final int lt = model.getLaptime();
         for (int i = 0; i < SEC_PER_HOUR; i ++) {
             model.incRuntime();
         }
         assertEquals(rt, model.getRuntime());
-        assertEquals(lt, model.getLaptime());
+
     }
 
     /**
-     * Verifies that laptime works correctly.
+     * Verifies that runtime decreases correctly
      */
     @Test
-    public void testLaptime() {
+    public void testDecrementRuntime(){
+        model.incRuntime();
         final int rt = model.getRuntime();
-        final int lt = model.getLaptime();
-        for (int i = 0; i < 5; i ++) {
+        model.decRuntime();
+        assertEquals(0, model.getRuntime());
+        assertNotEquals(rt, model.getRuntime());
+    }
+
+    @Test
+    /**
+     * Verifies that runtime resetes correctly
+     */
+    public void testResetRuntime(){
+        for (int i = 0; i < SEC_PER_MIN; i ++){
             model.incRuntime();
         }
-        assertEquals(rt + 5, model.getRuntime());
-        assertEquals(lt, model.getLaptime());
-        model.setLaptime();
-        assertEquals(rt + 5, model.getLaptime());
-        for (int i = 0; i < 5; i ++) {
-            model.incRuntime();
-        }
-        assertEquals(rt + 10, model.getRuntime());
-        assertEquals(rt + 5, model.getLaptime());
+        model.resetRuntime();
+        assertEquals(0, model.getRuntime());
     }
 }

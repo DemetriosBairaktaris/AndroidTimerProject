@@ -20,7 +20,7 @@ import group4.android.timerproject.model.clock.ClockModel;
 
 
 /**
- * Edited by cs313sp16p4group4 on 4/2/2016
+ * Converted from laufer's stopwatch code to cs313p4 timer code by group4 on 4/2/16
  */
 public abstract class AbstractClockModelTest {
 
