@@ -46,63 +46,52 @@ public abstract class AbstractTimerActivityTest {
     }
 
     /**
-     * Verifies the following scenario: time is 0, press start, wait 5+ seconds, expect time 5.
+     * Verifies the following scenario: time is 0, increment to 5, wait 3 seconds for timer to start
+     * , wait 2 seconds for timer to decrement, expect 3.
      *
      * @throws Throwable
      */
     @Test
-    public void testActivityScenarioRun() throws Throwable {
+    public void testActivityScenarioIncAndRun() throws Throwable {
         getActivity().runOnUiThread(() -> {
             assertEquals(0, getDisplayedValue());
-         //   assertTrue(getStartStopButton().performClick());
+            assertTrue(getButton().performClick());
         });
+        performClicks(4);
         Thread.sleep(5500); // <-- do not run this in the UI thread!
         runUiThreadTasks();
         getActivity().runOnUiThread(() -> {
-            assertEquals(5, getDisplayedValue());
-          //  assertTrue(getStartStopButton().performClick());
+            assertEquals(2, getDisplayedValue());
         });
     }
 
     /**
-     * Verifies the following scenario: time is 0, press start, wait 5+ seconds,
-     * expect time 5, press lap, wait 4 seconds, expect time 5, press start,
-     * expect time 5, press lap, expect time 9, press lap, expect time 0.
-     *
+     * Verifies the following scenario: Perform 5 clicks, wait 3 seconds to start
+     *  and 1 second for time to decrement. Expect 4 seconds, click button,
+     *  expect stopped.
      * @throws Throwable
      */
     @Test
-    public void testActivityScenarioRunLapReset() throws Throwable {
+    public void testActivityScenarioRunToStop() throws Throwable {
+        performClicks(5);
+        Thread.sleep(4500);
         getActivity().runOnUiThread(() -> {
+            assertEquals(4, getDisplayedValue());
+            assertTrue(getButton().performClick());
             assertEquals(0, getDisplayedValue());
-           // assertTrue(getStartStopButton().performClick());
         });
-        Thread.sleep(5500); // <-- do not run this in the UI thread!
-        runUiThreadTasks();
-        getActivity().runOnUiThread(() -> {
-            assertEquals(5, getDisplayedValue());
-           // assertTrue(getResetLapButton().performClick());
-        });
-        Thread.sleep(4000); // <-- do not run this in the UI thread!
-        runUiThreadTasks();
-        getActivity().runOnUiThread(() -> {
-            assertEquals(5, getDisplayedValue());
-           // assertTrue(getStartStopButton().performClick());
-        });
-        runUiThreadTasks();
-        getActivity().runOnUiThread(() -> {
-            assertEquals(5, getDisplayedValue());
-           // assertTrue(getResetLapButton().performClick());
-        });
-        runUiThreadTasks();
-        getActivity().runOnUiThread(() -> {
-            assertEquals(9, getDisplayedValue());
-           // assertTrue(getResetLapButton().performClick());
-        });
-        runUiThreadTasks();
-        getActivity().runOnUiThread(() -> assertEquals(0, getDisplayedValue()));
     }
 
+    //TODO: Find out how to assert alarm is playing
+    @Test
+    public void testActivityScenarioRunToAlarmToStop() throws Throwable{
+        performClicks(5);
+        Thread.sleep(8500);
+        getActivity().runOnUiThread(() -> {
+            assertEquals(0, getDisplayedValue());
+            assertTrue(getButton().performClick());
+        });
+    }
     // auxiliary methods for easy access to UI widgets
 
     protected abstract TimerAdapter getActivity();
@@ -113,18 +102,19 @@ public abstract class AbstractTimerActivityTest {
 
     protected int getDisplayedValue() {
         final TextView ts = (TextView) getActivity().findViewById(R.id.seconds);
-        //final TextView tm = (TextView) getActivity().findViewById(R.id.minutes);
         return  tvToInt(ts);
     }
 
-   // protected Button getStartStopButton() {
-       // return (Button) getActivity().findViewById(R.id.startStop);
-    //}
+    protected Button getButton() {
+       return (Button) getActivity().findViewById(R.id.stop_increment);
+    }
 
-    //protected Button getResetLapButton() {
-       // return (Button) getActivity().findViewById(R.id.resetLap);
-    //}
-
+    protected void performClicks(int click){
+        Button b = getButton();
+        for (int i = 0; i < click; i ++){
+            b.performClick();
+        }
+    }
     /**
      * Explicitly runs tasks scheduled to run on the UI thread in case this is required
      * by the testing framework, e.g., Robolectric.

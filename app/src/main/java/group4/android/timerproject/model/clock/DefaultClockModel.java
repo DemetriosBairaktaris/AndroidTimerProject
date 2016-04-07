@@ -28,10 +28,14 @@ public class DefaultClockModel implements ClockModel, OnTickSource {
                     listener.onTick();
                 }
             }, /*initial delay*/ 1000, /*periodic delay*/ 1000);
+
+            timer = null;
         }
 
         @Override
         public void stop() {
-            timer.cancel();
+            if (timer != null) {
+                timer.cancel();
+            }
         }
     }

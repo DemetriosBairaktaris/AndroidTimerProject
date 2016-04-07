@@ -14,17 +14,19 @@ public class AlarmState implements TimerState {
 
     @Override
     public void updateView() {
-
+        sm.updateUIRuntime();
     }
 
     @Override
     public void onButton() {
-
+        sm.actionReset();
+        sm.actionStop();
+        sm.toStoppedState();
     }
 
     @Override
     public void onTick() {
-
+        //TODO:Play Beep
     }
 
     @Override

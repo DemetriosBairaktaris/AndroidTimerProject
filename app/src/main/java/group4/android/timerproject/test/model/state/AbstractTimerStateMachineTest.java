@@ -37,7 +37,6 @@ public abstract class AbstractTimerStateMachineTest {
 
     @Before
     public void setUp() throws Exception {
-        model.actionInit();
         dependency = new UnifiedMockDependency();
     }
 

@@ -4,6 +4,9 @@ package group4.android.timerproject.model.state;
  * Created by demetribairaktaris on 3/23/16.
  */
 public interface TimerSMStateView {
+    // updates
+    int getTime();
+
     // transitions
     void toRunningState();  //4 states
     void toStoppedState();

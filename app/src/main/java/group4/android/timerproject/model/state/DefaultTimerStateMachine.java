@@ -22,8 +22,6 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
 
    public DefaultTimerStateMachine(TimeModel t, ClockModel c)
    {
-       //TODO write constructor with correct parameters;
-       //will need to add instance variables
         this.clock = c ;
         this.time = t ;
    }
@@ -37,32 +35,54 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
         return this.state.getState();
     }
 
+    //Updates
+    @Override public int getTime() { return this.time.getRuntime();}
+
    //Transitions
     @Override public void toRunningState() { this.setState(this.runningState);}
     @Override public void toStoppedState() {this.setState(this.stoppedState);}
     @Override public void toIncrementState() {this.setState(this.incrementState);}
     @Override public void toAlarmState() {this.setState(this.alarmState);}
     //Actions
-    @Override public void actionInit() {}
-    @Override public void actionReset() {}
-    @Override public void actionStart() {}
-    @Override public void actionStop() {}
-    @Override public void actionInc() {}
-    @Override public void actionDec() {}
-    @Override public void actionUpdateView() {}
+    @Override public void actionInit() {toStoppedState(); actionReset();}
+    @Override public void actionReset() {time.resetRuntime(); actionUpdateView();}
+    @Override public void actionStart() {clock.start();}
+    @Override public void actionStop() {clock.stop();}
+    @Override public void actionInc() {
+        if(time.getRuntime() < 99) {
+            clock.stop();
+            time.incRuntime();
+            actionUpdateView();
+            clock.start();
+        }
+    }
+    @Override public void actionDec() {
+        if (time.getRuntime() != 0) {
+            time.decRuntime();
+            actionUpdateView();
+        }
+        else {
+
+        }
+    }
+    @Override public void actionUpdateView() {state.updateView();}
 
 
-    @Override public void updateUIRuntime() {}
+    @Override public void updateUIRuntime() {
+        UIUpdateListener.updateTime(time.getRuntime());
+    }
 
-    @Override public void onButton() {} //forwards the button event call to the state
+    @Override public void onButton() {
+        state.onButton();
+    }
 
+    private TimerUIUpdateListener UIUpdateListener;
     @Override public void setUIUpdateListener(TimerUIUpdateListener listener) {
-
-        //to set a reference to a UIUpdateListener
+        UIUpdateListener = listener;
     }
 
     @Override
     public void onTick() {
-
+        this.state.onTick();
     }
 }
