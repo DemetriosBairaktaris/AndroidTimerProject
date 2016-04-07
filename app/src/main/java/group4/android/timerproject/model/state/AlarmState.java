@@ -26,7 +26,8 @@ public class AlarmState implements TimerState {
 
     @Override
     public void onTick() {
-        //TODO:Play Beep
+        //play beep
+        sm.playDefaultNotification();
     }
 
     @Override

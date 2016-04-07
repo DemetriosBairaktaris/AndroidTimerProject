@@ -67,6 +67,11 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     }
     @Override public void actionUpdateView() {state.updateView();}
 
+    @Override
+    public void playDefaultNotification() {
+        UIUpdateListener.playDefaultNotification();
+    }
+
 
     @Override public void updateUIRuntime() {
         UIUpdateListener.updateTime(time.getRuntime());
