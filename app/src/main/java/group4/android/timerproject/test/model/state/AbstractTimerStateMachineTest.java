@@ -16,7 +16,7 @@ import group4.android.timerproject.model.state.TimerStateMachine;
 import group4.android.timerproject.model.time.TimeModel;
 
 /**
- * Testcase superclass for the stopwatch state machine model. Unit-tests the state
+ * Testcase superclass for the timer state machine model. Unit-tests the state
  * machine in fast-forward mode by directly triggering successive tick events
  * without the presence of a pseudo-real-time clock. Uses a single unified mock
  * object for all dependencies of the state machine model.
@@ -71,7 +71,7 @@ public abstract class AbstractTimerStateMachineTest {
      */
     @Test
     public void testPreconditions() {
-        assertEquals(R.string.STOPPED, dependency.getState());
+        assertEquals(R.string.STOPPED, model.getState());
         assertEquals(0, dependency.getRuntime());
 
     }
@@ -81,7 +81,7 @@ public abstract class AbstractTimerStateMachineTest {
      * Increments time by 1, is in Increment State.
      */
     @Test
-    public void testScenarioStoppedIncrement() {
+    public void testScenarioStoppedIncrement() { //ok
         assertTimeEquals(0);
         assertEquals("Stopped", model.getState());
         // directly invoke the button press event handler methods
@@ -103,6 +103,8 @@ public abstract class AbstractTimerStateMachineTest {
         assertEquals("Increment", model.getState());
         onButtonRepeat(98);
         assertTimeEquals(99);
+        model.onButton();
+        assertTimeEquals(99); //check that user can't increment past 99
     }
 
     /**
@@ -117,8 +119,8 @@ public abstract class AbstractTimerStateMachineTest {
         // Increment time to 5 seconds
         onButtonRepeat(4);
         assertTimeEquals(5);
+        onTickRepeat(3); //mock 3-second-tick
         // Send to Running State
-        Thread.sleep(3500);
         assertEquals("Running", model.getState());
     }
 
@@ -133,12 +135,18 @@ public abstract class AbstractTimerStateMachineTest {
         model.onButton();
         onButtonRepeat(4);
         assertTimeEquals(5);
-        Thread.sleep(3500);
-        // Press button to send to Stopped State
-        model.onButton();
+        onTickRepeat(3);
+        assertEquals("Running",model.getState());
+        model.onButton();// Press button to send to Stopped State,should reset the runTime
         assertTimeEquals(0);
         assertEquals("Stopped", model.getState());
+
     }
+
+    /**
+     * Verifies that value of the runtime is 3 after 2 seconds of countdown.
+     * @throws InterruptedException
+     */
 
     @Test
     public void testScenarioRunningValues() throws InterruptedException
@@ -146,45 +154,61 @@ public abstract class AbstractTimerStateMachineTest {
         assertTimeEquals(0);
         model.onButton();
         onButtonRepeat(4);
-        Thread.sleep(5500);
+        onTickRepeat(3); //get past 3 second interval
+        onTickRepeat(2); //count down 2 seconds
         assertTimeEquals(3);
     }
+
+    /**
+     * Verifies that the alarm state is reached after 1 second count-down from running state.
+     * @throws InterruptedException
+     */
 
     @Test
     public void testScenarioRunningAlarm() throws InterruptedException {
         assertTimeEquals(0);
         model.onButton();
-        Thread.sleep(4500);
+        onTickRepeat(3);
+        onTickRepeat(1);
         assertEquals("Alarm",model.getState());
     }
 
+
+    /**
+     * Verifies scenerio :  press button, wait and then check if reaches alarm state, press button
+     * and check if in stopped state.
+     * @throws InterruptedException
+     */
     @Test
-    public void testScenarioAlarmStopped() throws InterruptedException{
+    public void testScenarioAlarmStopped() throws InterruptedException {
         assertTimeEquals(0);
         model.onButton();
-        Thread.sleep(4500);
-        assertEquals("Alarm",model.getState());
+        onTickRepeat(3);
+        onTickRepeat(1);
+        assertEquals("Alarm", model.getState());
         model.onButton();
         assertEquals("Stopped", model.getState());
     }
 
     /**
-     * Verifies the following scenario: time is 0, press start, wait 5+ seconds,
-     * expect time 5, press lap, wait 4 seconds, expect time 5, press start,
-     * expect time 5, press lap, expect time 9, press lap, expect time 0.
-     *
-     * @throws Throwable
-     */
-
-
-    /**
-     * Sends the given number of tick events to the model.
+     * Sends the given number of button events to the model.
      *
      *  @param n the number of tick events
      */
     protected void onButtonRepeat(final int n) {
         for (int i = 0; i < n; i++)
             model.onButton();
+    }
+
+    /**
+     * sends the given number of tick events to the model
+     */
+    protected void onTickRepeat(final int n)
+    {
+        for(int i = 0 ; i < n ; i++){
+            model.onTick();
+        }
+
     }
 
     /**
@@ -211,7 +235,7 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
 
     private int timeValue = -1, stateId = -1;
 
-    private int runningTime = 0, lapTime = -1;
+    private int runTime = 0;
 
     private boolean started = false;
 
@@ -219,9 +243,6 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
         return timeValue;
     }
 
-    public int getState() {
-        return stateId;
-    }
 
     public boolean isStarted() {
         return started;
@@ -254,21 +275,24 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
 
     @Override
     public void resetRuntime() {
-        runningTime = 0;
+        runTime = 0;
     }
 
     @Override
     public void incRuntime() {
-        runningTime++;
+        runTime++;
     }
 
     @Override
-    public void decRuntime() {
-
-    }
+    public void decRuntime() {runTime-- ;}
 
     @Override
     public int getRuntime() {
-        return runningTime;
+        return runTime;
+    }
+
+    @Override
+    public void setRunTime(int runTime) {
+        this.runTime = runTime ;
     }
 }

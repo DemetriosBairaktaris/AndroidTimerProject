@@ -5,5 +5,5 @@ import group4.android.timerproject.test.model.clock.DefaultClockModelTest;
 /**
  * Created by Eddy on 4/2/2016.
  */
-public class Test extends DefaultClockModelTest{
+public class Test extends DefaultTimeModelTest{
 }

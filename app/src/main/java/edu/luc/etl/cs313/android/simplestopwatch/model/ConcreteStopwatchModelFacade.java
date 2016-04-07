@@ -10,7 +10,7 @@
 //
 ///**
 // * An implementation of the model facade.
-// *
+//
 // * @author laufer
 // */
 //public class ConcreteStopwatchModelFacade implements StopwatchModelFacade {

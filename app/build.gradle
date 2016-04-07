@@ -15,7 +15,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "edu.luc.etl.cs313.android.stopwatch"
+        applicationId "group4.android.timerproject"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

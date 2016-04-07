@@ -2,21 +2,21 @@ package group4.android.timerproject.android;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import group4.android.timerproject.R;
 import group4.android.timerproject.common.TimerUIUpdateListener;
+import group4.android.timerproject.model.ConcreteTimerFacade;
+import group4.android.timerproject.model.TimerFacade;
 
 /**
  * Created by demetribairaktaris on 3/23/16.
  */
 public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
-
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+    TimerFacade timerFacade ;
 
 
     @Override
@@ -24,12 +24,15 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        timerFacade = new ConcreteTimerFacade();
+        timerFacade.setUIUpdateListener(this);
+
+
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
 
     }
 
@@ -67,4 +70,14 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     public void updateState(int stateId) {
 
     }
+
+    /**
+     * onButton() receives button events from UI and forwards to the Facade;
+     * @param view
+     */
+    public void onButton(View view){
+        this.timerFacade.onButton();
+    }
+
+
 }

@@ -17,5 +17,6 @@
     <string name="RUNNING">Running</string>
     <string name="LAP_RUNNING">Lap/Running</string>
     <string name="LAP_STOPPED">Lap/Stopped</string>
+    <string name="start_increment">Stop/Increment</string>
 
 </resources>

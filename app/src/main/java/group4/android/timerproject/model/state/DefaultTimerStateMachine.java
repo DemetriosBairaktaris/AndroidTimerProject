@@ -19,7 +19,8 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
    private TimerState alarmState = new AlarmState(this);
    private ClockModel clock ;
    private TimeModel time ;
-   public DefaultTimerStateMachine(ClockModel c, TimeModel t)
+
+   public DefaultTimerStateMachine(TimeModel t, ClockModel c)
    {
        //TODO write constructor with correct parameters;
        //will need to add instance variables

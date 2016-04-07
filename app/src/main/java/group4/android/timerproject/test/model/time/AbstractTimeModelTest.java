@@ -61,11 +61,10 @@ public abstract class AbstractTimeModelTest {
      */
     @Test
     public void testIncrementRuntimeMany() {
-        final int rt = model.getRuntime();
-        for (int i = 0; i < SEC_PER_HOUR; i ++) {
+        for (int i = 0; i < 99; i ++) {
             model.incRuntime();
         }
-        assertEquals(rt, model.getRuntime());
+        assertEquals(99, model.getRuntime());
 
     }
 
