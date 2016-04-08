@@ -21,6 +21,7 @@ public interface TimerSMStateView {
     void actionInc();
     void actionDec();
     void actionUpdateView();
+    void playDefaultNotification();
 
     // state-dependent UI updates
     void updateUIRuntime();

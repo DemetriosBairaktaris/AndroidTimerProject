@@ -5,11 +5,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import group4.android.timerproject.R;
 import group4.android.timerproject.common.TimerUIUpdateListener;
 import group4.android.timerproject.model.ConcreteTimerFacade;
 import group4.android.timerproject.model.TimerFacade;
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import java.io.IOException;
 
 /**
  * Created by demetribairaktaris on 3/23/16.
@@ -29,13 +35,11 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
 
     }
-
     @Override
     public void onStart() {
         super.onStart();
 
     }
-
     @Override
     public void onStop() {
         super.onStop();
@@ -79,5 +83,21 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         this.timerFacade.onButton();
     }
 
+
+    public void playDefaultNotification() {
+        final Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        final MediaPlayer mediaPlayer = new MediaPlayer();
+        final Context context = getApplicationContext();
+
+        try {
+            mediaPlayer.setDataSource(context, defaultRingtoneUri);
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_NOTIFICATION);
+            mediaPlayer.prepare();
+            mediaPlayer.setOnCompletionListener(MediaPlayer::release);
+            mediaPlayer.start();
+        } catch (final IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 
 }
