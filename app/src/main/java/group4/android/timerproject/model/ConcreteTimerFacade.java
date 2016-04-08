@@ -36,16 +36,16 @@ public class ConcreteTimerFacade implements TimerFacade {
 
     @Override
     public void onStart() {
-        //Todo
+        stateMachine.actionInit();
     }
 
     @Override
     public void onButton() {
-       // this.stateMachine.onButton();
+        this.stateMachine.onButton();
     }
 
     @Override
     public void setUIUpdateListener(TimerUIUpdateListener listener) {
-       // this.stateMachine.setUIUpdateListener(listener);
+        this.stateMachine.setUIUpdateListener(listener);
     }
 }

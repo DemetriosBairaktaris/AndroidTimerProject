@@ -39,16 +39,24 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     @Override public int getTime() { return this.time.getRuntime();}
 
    //Transitions
-    @Override public void toRunningState() { this.setState(this.runningState);}
-    @Override public void toStoppedState() {this.setState(this.stoppedState);}
-    @Override public void toIncrementState() {this.setState(this.incrementState);}
-    @Override public void toAlarmState() {this.setState(this.alarmState);}
+    @Override public void toRunningState() {
+        clock.stop();
+        playDefaultNotification();
+        this.setState(this.runningState);
+        clock.start();
+
+    }
+    @Override public synchronized void toStoppedState() {
+        this.clock.stop();
+        this.setState(this.stoppedState);}
+    @Override public synchronized void toIncrementState() {this.setState(this.incrementState);}
+    @Override public synchronized void toAlarmState() {this.setState(this.alarmState);}
     //Actions
-    @Override public void actionInit() {toStoppedState(); actionReset();}
-    @Override public void actionReset() {time.resetRuntime(); actionUpdateView();}
-    @Override public void actionStart() {clock.start();}
-    @Override public void actionStop() {clock.stop();}
-    @Override public void actionInc() {
+    @Override public synchronized void actionInit() {toStoppedState(); actionReset();}
+    @Override public synchronized void actionReset() {time.resetRuntime(); actionUpdateView();}
+    @Override public synchronized void actionStart() {clock.start();}
+    @Override public synchronized void actionStop() {clock.stop();}
+    @Override public synchronized void actionInc() {
         if(time.getRuntime() < 99) {
             clock.stop();
             time.incRuntime();
@@ -56,16 +64,15 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
             clock.start();
         }
     }
-    @Override public void actionDec() {
-        if (time.getRuntime() != 0) {
+    @Override public synchronized void actionDec() {
+
+       // if (time.getRuntime() != 0) {
             time.decRuntime();
             actionUpdateView();
-        }
-        else {
+        //}
 
-        }
     }
-    @Override public void actionUpdateView() {state.updateView();}
+    @Override public synchronized void actionUpdateView() {state.updateView();}
 
     @Override
     public void playDefaultNotification() {
@@ -73,11 +80,11 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     }
 
 
-    @Override public void updateUIRuntime() {
+    @Override public synchronized void updateUIRuntime() {
         UIUpdateListener.updateTime(time.getRuntime());
     }
 
-    @Override public void onButton() {
+    @Override public synchronized void onButton() {
         state.onButton();
     }
 
@@ -87,7 +94,7 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     }
 
     @Override
-    public void onTick() {
+    public synchronized void onTick() {
         this.state.onTick();
     }
 }

@@ -29,13 +29,11 @@ public class DefaultClockModel implements ClockModel, OnTickSource {
                 }
             }, /*initial delay*/ 1000, /*periodic delay*/ 1000);
 
-            timer = null;
+
         }
 
         @Override
         public void stop() {
-            if (timer != null) {
-                timer.cancel();
-            }
+            try{timer.cancel();}catch(Exception e){}//the golden ticket
         }
     }

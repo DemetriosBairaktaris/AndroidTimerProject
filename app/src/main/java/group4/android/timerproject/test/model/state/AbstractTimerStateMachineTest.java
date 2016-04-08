@@ -70,7 +70,7 @@ public abstract class AbstractTimerStateMachineTest {
      */
     @Test
     public void testPreconditions() {
-        assertEquals(R.string.STOPPED, model.getState());
+        assertEquals("Stopped", model.getState());
         assertEquals(0, dependency.getRuntime());
 
     }
@@ -245,6 +245,11 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
 
     public boolean isStarted() {
         return started;
+    }
+
+    @Override
+    public void playDefaultNotification() {
+
     }
 
     @Override

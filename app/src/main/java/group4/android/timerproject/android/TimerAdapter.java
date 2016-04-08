@@ -38,6 +38,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     @Override
     public void onStart() {
         super.onStart();
+        timerFacade.onStart();
 
     }
     @Override
@@ -45,19 +46,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         super.onStop();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        //TODO be able to save the state of app
-        //utilize outState.putInt(String key, int value);
-        super.onSaveInstanceState(outState);
-    }
 
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState){
-            super.onRestoreInstanceState(savedInstanceState);
-        //TODO Restore the instance state
-        // utilize int value = savedInstanceState.getInt(Stringkey);
-    }
 
     @Override
     public void updateTime(int time) {
@@ -95,6 +84,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
             mediaPlayer.prepare();
             mediaPlayer.setOnCompletionListener(MediaPlayer::release);
             mediaPlayer.start();
+            //Maybe mediaPlayer.stop()
         } catch (final IOException ex) {
             throw new RuntimeException(ex);
         }

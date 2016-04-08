@@ -25,7 +25,7 @@ public class IncrementState implements TimerState {
 
     @Override
     public void onTick() {
-        if (delay == 3) {
+        if (delay == 2) {
             sm.toRunningState();
         }else {
             delay++;

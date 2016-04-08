@@ -18,18 +18,19 @@ public class RunningState implements TimerState {
 
     @Override
     public void onButton() {
-        sm.toStoppedState();
         sm.actionReset();
         sm.actionStop();
+        sm.toStoppedState();
     }
 
     @Override
     public void onTick() {
         if (sm.getTime() == 0) {
             sm.toAlarmState();
-            return;
+            return ;
         }
         sm.actionDec();
+
     }
 
     @Override

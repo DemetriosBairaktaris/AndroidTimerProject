@@ -11,4 +11,6 @@ import group4.android.timerproject.model.clock.OnTickListener;
 public interface TimerState extends TimerUIListener, OnTickListener{
         void updateView();
         public String getState();
+
+
 }
