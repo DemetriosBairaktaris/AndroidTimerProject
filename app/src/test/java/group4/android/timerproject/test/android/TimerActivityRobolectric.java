@@ -2,6 +2,7 @@ package group4.android.timerproject.test.android;
 
 import group4.android.timerproject.android.TimerAdapter;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -17,6 +18,8 @@ import org.robolectric.annotation.Config;
  */
 @RunWith(RobolectricTestRunner.class)
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk=18)
+
+
 public class TimerActivityRobolectric extends AbstractTimerActivityTest {
 
     private static String TAG = "timer-android-activity-robolectric";
@@ -27,6 +30,8 @@ public class TimerActivityRobolectric extends AbstractTimerActivityTest {
     public void setUp() {
         activity = Robolectric.buildActivity(TimerAdapter.class).create().start().visible().get();
     }
+    @After
+    public void tearDown(){activity = null;}
 
     @Override
     protected TimerAdapter getActivity() {

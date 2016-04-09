@@ -58,9 +58,10 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     @Override public synchronized void actionStop() {clock.stop();}
     @Override public synchronized void actionInc() {
         if(time.getRuntime() < 99) {
-            clock.stop();
+            actionStop();
             time.incRuntime();
             actionUpdateView();
+            if (time.getRuntime()==99){toRunningState();return;}
             clock.start();
         }
     }

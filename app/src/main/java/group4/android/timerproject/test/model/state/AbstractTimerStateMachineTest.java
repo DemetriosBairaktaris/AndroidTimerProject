@@ -92,7 +92,7 @@ public abstract class AbstractTimerStateMachineTest {
 
     /**
      * Verifies the following scenario: go from Running to Increment state, time is 1.
-     * Increment time to max time (99).
+     * Increment time to max time (99) and make sure to immedietly transition to running state.
      *
      */
     @Test
@@ -102,8 +102,7 @@ public abstract class AbstractTimerStateMachineTest {
         assertEquals("Increment", model.getState());
         onButtonRepeat(98);
         assertTimeEquals(99);
-        model.onButton();
-        assertTimeEquals(99); //check that user can't increment past 99
+        assertEquals("Running",model.getState());
     }
 
     /**
@@ -169,7 +168,10 @@ public abstract class AbstractTimerStateMachineTest {
         model.onButton();
         onTickRepeat(3);
         onTickRepeat(1);
+        assertTimeEquals(0);
+        onTickRepeat(1);
         assertEquals("Alarm",model.getState());
+
     }
 
 
@@ -249,7 +251,6 @@ class UnifiedMockDependency implements TimeModel, ClockModel, TimerUIUpdateListe
 
     @Override
     public void playDefaultNotification() {
-
     }
 
     @Override

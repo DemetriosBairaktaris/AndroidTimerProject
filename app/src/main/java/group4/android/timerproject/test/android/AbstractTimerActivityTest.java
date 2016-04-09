@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import android.content.pm.ActivityInfo;
 import android.widget.Button;
 import android.widget.TextView;
 import group4.android.timerproject.R;
@@ -62,7 +63,7 @@ public abstract class AbstractTimerActivityTest {
         Thread.sleep(5500); // <-- do not run this in the UI thread!
         runUiThreadTasks();
         getActivity().runOnUiThread(() -> {
-            assertEquals(2, getDisplayedValue());
+            assertEquals(3, getDisplayedValue());
         });
     }
 
@@ -74,7 +75,7 @@ public abstract class AbstractTimerActivityTest {
      */
     @Test
     public void testActivityScenarioRunToStop() throws Throwable {
-       getActivity().runOnUiThread( () -> performClicks(5) );
+       getActivity().runOnUiThread(() -> performClicks(5));
         Thread.sleep(4500);
         getActivity().runOnUiThread(() -> {
             //assertEquals(4, getDisplayedValue());
@@ -83,7 +84,6 @@ public abstract class AbstractTimerActivityTest {
         });
     }
 
-    //TODO: Find out how to assert alarm is playing
     @Test
     public void testActivityScenarioRunToAlarmToStop() throws Throwable{
         getActivity().runOnUiThread(()->performClicks(5));
@@ -92,6 +92,25 @@ public abstract class AbstractTimerActivityTest {
             assertEquals(0, getDisplayedValue());
             assertTrue(getButton().performClick());
         });
+    }
+
+    @Test
+    public void testScreenRotation() throws Throwable
+    {
+        getActivity().runOnUiThread(() -> {
+            assertEquals(0,getDisplayedValue());
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            assertEquals(0, getDisplayedValue());
+            performClicks(5);
+        });
+        Thread.sleep(4500);
+        runUiThreadTasks();
+        getActivity().runOnUiThread(()->{
+            assertEquals(4,getDisplayedValue());
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            assertEquals(4,getDisplayedValue());
+        });
+
     }
     // auxiliary methods for easy access to UI widgets
 

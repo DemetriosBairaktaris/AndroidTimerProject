@@ -41,12 +41,6 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         timerFacade.onStart();
 
     }
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-
 
     @Override
     public void updateTime(int time) {
@@ -56,12 +50,10 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
                 final int seconds = time ;
                 tvS.setText(Integer.toString(seconds / 10) + Integer.toString(seconds % 10));
             });
-
     }
 
     @Override
     public void updateState(int stateId) {
-
     }
 
     /**
@@ -84,7 +76,6 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
             mediaPlayer.prepare();
             mediaPlayer.setOnCompletionListener(MediaPlayer::release);
             mediaPlayer.start();
-            //Maybe mediaPlayer.stop()
         } catch (final IOException ex) {
             throw new RuntimeException(ex);
         }

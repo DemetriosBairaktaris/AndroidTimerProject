@@ -10,7 +10,7 @@ public class IncrementState implements TimerState {
     public IncrementState(TimerSMStateView sm)
     {
         this.sm = sm ;
-        delay = 1;
+        delay = 0;
     }
     @Override
     public void updateView() {
@@ -19,7 +19,7 @@ public class IncrementState implements TimerState {
 
     @Override
     public void onButton() {
-        delay = 1;
+        delay = 0;
         sm.actionInc();
     }
 

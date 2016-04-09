@@ -25,11 +25,12 @@ public class RunningState implements TimerState {
 
     @Override
     public void onTick() {
+        sm.actionDec();
         if (sm.getTime() == 0) {
             sm.toAlarmState();
             return ;
         }
-        sm.actionDec();
+
 
     }
 

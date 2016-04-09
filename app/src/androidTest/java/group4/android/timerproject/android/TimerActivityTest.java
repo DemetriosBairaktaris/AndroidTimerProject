@@ -52,4 +52,8 @@ public class TimerActivityTest extends ActivityInstrumentationTestCase2<TimerAda
     public void testActivityScenarioRunToAlarmToStop() throws Throwable {
         actualTest.testActivityScenarioRunToAlarmToStop();
     }
+    public void testScreenRotation() throws Throwable{
+        actualTest.testScreenRotation();
+    }
+
 }

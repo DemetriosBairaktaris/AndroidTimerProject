@@ -57,8 +57,8 @@
         android:layout_height="wrap_content"
         android:text="@string/start_increment"
         android:id="@+id/stop_increment"
-        android:layout_below="@+id/buttons"
-        android:layout_centerHorizontal="true"
-        android:onClick="onButton" />
+        android:onClick="onButton"
+        android:layout_below="@+id/timer"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
