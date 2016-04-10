@@ -61,15 +61,13 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     public void updateState(int stateId) {
     }
 
-    /**
-     * onButton() receives button events from UI and forwards to the Facade;
-     * @param view
-     */
     public void onButton(View view){
         this.timerFacade.onButton();
     }
 
-
+    /**
+     * Plays a noise when the timer finishes counting down
+     */
     public void playDefaultNotification() {
         final Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         final MediaPlayer mediaPlayer = new MediaPlayer();
