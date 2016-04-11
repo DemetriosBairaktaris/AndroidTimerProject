@@ -1,6 +1,7 @@
 package group4.android.timerproject.model.state;
 
 /**
+ * A implementation of the alarm state of the Timer
  * Created by demetribairaktaris on 3/23/16.
  */
 public class AlarmState implements TimerState {
@@ -17,6 +18,9 @@ public class AlarmState implements TimerState {
         sm.updateUIRuntime();
     }
 
+    /**
+     * Button event will cause the alarm to stop and the timer will transition to stopped.
+     */
     @Override
     public void onButton() {
         sm.actionReset();
@@ -24,6 +28,9 @@ public class AlarmState implements TimerState {
         sm.toStoppedState();
     }
 
+    /**
+     * Every tick event causes default notification ringtone of phone to be played
+     */
     @Override
     public void onTick() {
        sm.playDefaultNotification();

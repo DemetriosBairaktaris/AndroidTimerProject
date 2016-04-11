@@ -1,6 +1,7 @@
 package group4.android.timerproject.model.state;
 
 /**
+ * An implementation of the incrementing state of the timer
  * Created by demetribairaktaris on 3/23/16.
  */
 public class IncrementState implements TimerState {
@@ -12,17 +13,25 @@ public class IncrementState implements TimerState {
         this.sm = sm ;
         delay = 0;
     }
+
     @Override
     public void updateView() {
         sm.updateUIRuntime();
     }
 
+    /**
+     * Button event will increment time by one
+     */
     @Override
     public void onButton() {
         delay = 0;
         sm.actionInc();
     }
 
+    /**
+     * Three tick events that happen after a button event and before the next button event will
+     * cause the timer to transiton to the running state
+     */
     @Override
     public void onTick() {
         if (delay == 2) {

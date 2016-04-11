@@ -64,7 +64,9 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
         this.timerFacade.onButton();
     }
 
-
+    /**
+     * playDefaultNotification() plays default ringtone notification of the current device on every call
+     */
     public void playDefaultNotification() {
         final Uri defaultRingtoneUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         final MediaPlayer mediaPlayer = new MediaPlayer();

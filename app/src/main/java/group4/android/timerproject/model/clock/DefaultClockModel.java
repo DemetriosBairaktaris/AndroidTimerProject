@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
+ * The default clock model that sends out tick events to its OnTickListener.
  * Created by demetribairaktaris on 3/23/16.
  */
 public class DefaultClockModel implements ClockModel, OnTickSource {
@@ -12,11 +13,18 @@ public class DefaultClockModel implements ClockModel, OnTickSource {
 
         private OnTickListener listener;
 
+    /**
+     * Sets the OnTickListener that will listen to this objects tick events.
+     * @param listener listens to tick events
+     */
         @Override
         public void setOnTickListener(final OnTickListener listener) {
             this.listener = listener;
         }
 
+    /**
+     * Simple method to start the clock and emit tick event every 1 second.
+     */
         @Override
         public void start() {
             timer = new Timer();
@@ -32,6 +40,9 @@ public class DefaultClockModel implements ClockModel, OnTickSource {
 
         }
 
+    /**
+     * Stops the clock and emits no tick events
+     */
         @Override
         public void stop() {
             try{timer.cancel();}catch(Exception e){}//the golden ticket

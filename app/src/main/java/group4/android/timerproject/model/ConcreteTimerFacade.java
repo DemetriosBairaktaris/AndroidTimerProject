@@ -15,8 +15,9 @@ import group4.android.timerproject.model.time.TimeModel;
 
 /**
  * An implementation of the model facade.
-
+ *
  * @author demetribairaktaris
+ *
  */
 public class ConcreteTimerFacade implements TimerFacade {
 
@@ -33,17 +34,27 @@ public class ConcreteTimerFacade implements TimerFacade {
         clockModel.setOnTickListener(stateMachine);
     }
 
-
+    /**
+     * Implementation of the onStart() method declared in <<TimerFacade>>
+     * Calling this method will initiate the state machine.
+     */
     @Override
     public void onStart() {
         stateMachine.actionInit();
     }
-
+    /**
+     * Implementation of the onButton() method declared in <<TimerUIListener>>
+     * Calling this method will  forward a button event to the state machine.
+     */
     @Override
     public void onButton() {
         this.stateMachine.onButton();
     }
-
+    /**
+     * Implementation of the setUIUpdateListener() method declared in <<TimerUIUpdateSourcer>>
+     * Calling this method will pass a TimerUiUpdateListener to the state machine
+     * @param listener the listener object.
+     */
     @Override
     public void setUIUpdateListener(TimerUIUpdateListener listener) {
         this.stateMachine.setUIUpdateListener(listener);

@@ -1,6 +1,7 @@
 package group4.android.timerproject.model.state;
 
 /**
+ * An implementation of the running state of the timer.
  * Created by demetribairaktaris on 3/23/16.
  */
 public class RunningState implements TimerState {
@@ -11,11 +12,18 @@ public class RunningState implements TimerState {
     {
         this.sm = sm ;
     }
+
+    /**
+     * Updates the view on screen
+     */
     @Override
     public void updateView() {
         sm.updateUIRuntime();
     }
 
+    /**
+     * Button event will stop the timer and runtime will display 00
+     */
     @Override
     public void onButton() {
         sm.actionReset();
@@ -23,6 +31,9 @@ public class RunningState implements TimerState {
         sm.toStoppedState();
     }
 
+    /**
+     * Tick event will decrement the runtime by 1 until 0, then timer goes to alarm state.
+     */
     @Override
     public void onTick() {
         sm.actionDec();
@@ -30,14 +41,11 @@ public class RunningState implements TimerState {
             sm.toAlarmState();
             return ;
         }
-
-
     }
 
     @Override
      public String getState(){
         return "Running";
     }
-
 
 }
