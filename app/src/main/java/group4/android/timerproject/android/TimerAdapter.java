@@ -42,12 +42,17 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
 
     }
 
+    /**
+     * Updates the time in the UI.
+     *
+     * @param time the time in seconds
+     */
     @Override
     public void updateTime(int time) {
             // UI adapter responsibility to schedule incoming events on UI thread
             runOnUiThread(() -> {
                 final TextView tvS = (TextView) findViewById(R.id.seconds);
-                final int seconds = time ;
+                final int seconds = time;
                 tvS.setText(Integer.toString(seconds / 10) + Integer.toString(seconds % 10));
             });
     }
@@ -57,7 +62,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     }
 
     /**
-     * onButton() receives button events from UI and forwards to the Facade;
+     * forwards button event to the facade
      * @param view
      */
     public void onButton(View view){
