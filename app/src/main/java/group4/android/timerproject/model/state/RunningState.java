@@ -1,5 +1,7 @@
 package group4.android.timerproject.model.state;
 
+import android.widget.EditText;
+
 /**
  * An implementation of the running state of the timer.
  * Created by demetribairaktaris on 3/23/16.
@@ -29,6 +31,11 @@ public class RunningState implements TimerState {
         sm.actionReset();
         sm.actionStop();
         sm.toStoppedState();
+    }
+
+    @Override
+    public void setTime(EditText editText) {
+        editText.setEnabled(false);
     }
 
     /**

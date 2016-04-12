@@ -1,5 +1,8 @@
 package group4.android.timerproject.common;
 
+import android.view.View;
+import android.widget.EditText;
+
 /**
  * Any class that implements this is a listener
  * to button events.
@@ -8,4 +11,5 @@ package group4.android.timerproject.common;
 public interface TimerUIListener {
 
     void onButton ();
+    void setTime(EditText editText);
 }

@@ -1,5 +1,7 @@
 package group4.android.timerproject.model.state;
 
+import android.widget.EditText;
+
 /**
  * A implementation of the alarm state of the Timer
  * Created by demetribairaktaris on 3/23/16.
@@ -28,12 +30,17 @@ public class AlarmState implements TimerState {
         sm.toStoppedState();
     }
 
+
     /**
      * Every tick event causes default notification ringtone of phone to be played
      */
     @Override
     public void onTick() {
        sm.playDefaultNotification();
+    }
+    @Override
+    public void setTime(EditText editText) {
+        editText.setEnabled(false);
     }
 
     @Override

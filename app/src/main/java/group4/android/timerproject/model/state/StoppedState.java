@@ -1,5 +1,13 @@
 package group4.android.timerproject.model.state;
 
+import android.text.Editable;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import group4.android.timerproject.R;
+
 /**
  * An Implementation of the alarm state of the timer
  * Created by demetribairaktaris on 3/23/16.
@@ -24,6 +32,13 @@ public class StoppedState implements TimerState {
     public void onButton() {
         sm.toIncrementState();
         sm.actionInc();
+    }
+
+    @Override
+    public void setTime(EditText editText) {
+        try {
+            editText.setEnabled(true);
+        } catch (Exception e) {}
     }
 
     /**

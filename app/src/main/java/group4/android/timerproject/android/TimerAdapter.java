@@ -2,8 +2,12 @@ package group4.android.timerproject.android;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import group4.android.timerproject.R;
 import group4.android.timerproject.common.TimerUIUpdateListener;
@@ -29,9 +33,9 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         timerFacade = new ConcreteTimerFacade();
         timerFacade.setUIUpdateListener(this);
+
 
 
     }
@@ -39,6 +43,7 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     public void onStart() {
         super.onStart();
         timerFacade.onStart();
+        getText(findViewById(R.id.textbox));
 
     }
 
@@ -87,5 +92,11 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
             throw new RuntimeException(ex);
         }
     }
+
+    public void getText(View view){
+        timerFacade.setTime((EditText)view);
+    }
+
+
 
 }

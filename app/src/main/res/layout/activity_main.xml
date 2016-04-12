@@ -61,4 +61,13 @@
         android:layout_below="@+id/timer"
         android:layout_centerHorizontal="true" />
 
+    <EditText
+        android:layout_width="141dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/textbox"
+        android:layout_below="@+id/stop_increment"
+        android:layout_centerHorizontal="true"
+        android:inputType="number"
+        android:imeOptions="actionSend"
+    />
 </RelativeLayout>

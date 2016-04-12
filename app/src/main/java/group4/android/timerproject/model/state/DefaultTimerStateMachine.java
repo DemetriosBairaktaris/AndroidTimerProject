@@ -2,6 +2,8 @@ package group4.android.timerproject.model.state;
 
 
 
+import android.widget.EditText;
+
 import group4.android.timerproject.common.TimerUIUpdateListener;
 import group4.android.timerproject.model.clock.ClockModel;
 import group4.android.timerproject.model.time.TimeModel;
@@ -107,6 +109,12 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
             clock.start();
         }
     }
+    @Override
+    public synchronized void actionSetTime(int timeValue){
+        time.setRunTime(timeValue);
+        actionUpdateView();
+        toRunningState();
+    }
 
     /**
      * decrements the runtime and updates the screen
@@ -144,6 +152,11 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
         state.onButton();
     }
 
+    @Override
+    public void setTime(EditText editText) {
+        state.setTime(editText);
+    }
+
     private TimerUIUpdateListener UIUpdateListener;
     /**
      * Sets the TimerUIUpdateListener for the state machine.
@@ -160,4 +173,5 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
     public synchronized void onTick() {
         this.state.onTick();
     }
+
 }
