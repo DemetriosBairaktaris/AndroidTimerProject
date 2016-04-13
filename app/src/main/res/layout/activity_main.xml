@@ -70,4 +70,5 @@
         android:inputType="number"
         android:imeOptions="actionSend"
     />
+
 </RelativeLayout>

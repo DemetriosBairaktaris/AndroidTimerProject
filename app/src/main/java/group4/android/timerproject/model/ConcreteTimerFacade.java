@@ -70,13 +70,12 @@ public class ConcreteTimerFacade implements TimerFacade {
                 if(stateMachine.getState() != "Stopped"){return handled ; }
                 if (actionId == EditorInfo.IME_ACTION_SEND) {
                     if(v.getText().toString().length() > 2 ){
-                        v.setText("99");
+                        return handled ;
                     }
-                    else if (v.getText().toString().length() == 0){ v.setText("1"); }
+                    else if (v.getText().toString().length() == 0){ return handled; }
                     int timeValue = Integer.parseInt(v.getText().toString());
                     stateMachine.actionSetTime(timeValue);
                     handled = true;
-                    Log.d("EDITOR ACTION: ",((Integer)stateMachine.getTime()).toString());
                 }
                 return handled;
             }

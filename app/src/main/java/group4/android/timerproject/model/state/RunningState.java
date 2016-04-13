@@ -45,8 +45,9 @@ public class RunningState implements TimerState {
     public void onTick() {
         sm.actionDec();
         if (sm.getTime() == 0) {
+            sm.playDefaultNotification();
             sm.toAlarmState();
-            return ;
+
         }
     }
 

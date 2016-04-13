@@ -121,10 +121,8 @@ public class DefaultTimerStateMachine implements TimerStateMachine {
      */
     @Override public synchronized void actionDec() {
 
-       // if (time.getRuntime() != 0) {
             time.decRuntime();
             actionUpdateView();
-        //}
 
     }
 

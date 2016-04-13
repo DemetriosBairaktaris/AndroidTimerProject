@@ -1,25 +1,22 @@
 package group4.android.timerproject.android;
 
 import android.app.Activity;
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.IOException;
+
 import group4.android.timerproject.R;
 import group4.android.timerproject.common.TimerUIUpdateListener;
 import group4.android.timerproject.model.ConcreteTimerFacade;
 import group4.android.timerproject.model.TimerFacade;
-import android.content.Context;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnCompletionListener;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import java.io.IOException;
 
 /**
  * Created by demetribairaktaris on 3/23/16.
@@ -94,7 +91,9 @@ public class TimerAdapter extends Activity implements TimerUIUpdateListener {
     }
 
     public void getText(View view){
-        timerFacade.setTime((EditText)view);
+        EditText editText = (EditText)view ;
+        editText.setHint("Enter 0 - 99");
+        timerFacade.setTime(editText);
     }
 
 
